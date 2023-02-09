@@ -7,9 +7,9 @@ namespace BinanceSDK.Public
 	{
 		private PublicRestRaw _rawApi = new PublicRestRaw();
 
-		public Ticker[] GetTickers()
+		public async Task<Ticker[]> GetTickersAsync()
 		{
-			string json = _rawApi.GetTickers();
+			string json = await _rawApi.GetTickersAsync();
 			return JsonConvert.DeserializeObject<Ticker[]>(json)!;
 		}
 	}

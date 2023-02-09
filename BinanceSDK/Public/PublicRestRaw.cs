@@ -1,15 +1,16 @@
-﻿using System.Net;
+﻿using BinanceSDK.Helpers;
 
 namespace BinanceSDK.Public
 {
 	public class PublicRestRaw
 	{
-		public string GetTickers()
+		public async Task<string> GetTickersAsync()
 		{
 			string url = "https://api.binance.com" + "/api/v3/ticker/24hr";
-			using (WebClient client = new WebClient())
+			using (MyClient client = new MyClient())
 			{
-				return client.DownloadString(url);
+				HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, url);
+				return await client.Send(req);
 			}
 		}
 	}

@@ -6,10 +6,10 @@ namespace BinanceSdkTest
 	public class PublicRestTest
 	{
 		[TestMethod]
-		public void ShouldGetTickers()
+		public async Task ShouldGetTickers()
 		{
 			PublicRest client = new PublicRest();
-			var tickers = client.GetTickers();
+			var tickers = await client.GetTickersAsync();
 			Assert.IsNotNull(tickers);
 			Assert.IsTrue(tickers.Length > 0);
 		}
