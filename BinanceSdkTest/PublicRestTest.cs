@@ -1,4 +1,4 @@
-using BinanceSDK;
+using BinanceSDK.Public;
 
 namespace BinanceSdkTest
 {
