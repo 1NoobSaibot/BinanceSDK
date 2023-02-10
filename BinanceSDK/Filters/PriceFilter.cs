@@ -1,4 +1,6 @@
-﻿namespace BinanceSDK.Filters
+﻿using BinanceSDK.Helpers;
+
+namespace BinanceSDK.Filters
 {
 	public class PriceFilter
 	{
@@ -44,8 +46,7 @@
 				return true;
 			}
 
-			decimal res = price / TickeSize;
-			return (res - ((int)res)) == 0m;
+			return price.Mod(TickeSize) == 0;
 		}
 	}
 }
