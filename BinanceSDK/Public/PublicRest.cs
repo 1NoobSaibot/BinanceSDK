@@ -6,7 +6,7 @@ namespace BinanceSDK.Public
 {
 	public class PublicRest : IPublicRest
 	{
-		private PublicRestRaw _rawApi = new PublicRestRaw();
+		private readonly PublicRestRaw _rawApi = new PublicRestRaw();
 
 		public async Task<Ticker[]> GetTickersAsync()
 		{
