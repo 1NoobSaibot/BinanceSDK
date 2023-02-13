@@ -1,4 +1,9 @@
-﻿using BinanceSDK.DTO.V1;
+﻿using BinanceSDK.DTO;
+using BinanceSDK.DTO.V1;
+using BinanceSDK.DTO.V1.Snapshot;
+using BinanceSDK.DTO.V1.Snapshot.Futures;
+using BinanceSDK.DTO.V1.Snapshot.Margin;
+using BinanceSDK.DTO.V1.Snapshot.Spot;
 using Newtonsoft.Json;
 
 namespace BinanceSDK.Private
@@ -18,5 +23,61 @@ namespace BinanceSDK.Private
 			string json = await _rawApi.GetCoinsAsync();
 			return JsonConvert.DeserializeObject<Coin[]>(json)!;
 		}
+
+
+		#region GettingSnapshots
+		public async Task<SnapshotResponce<SpotSnapshotData>> GetSpotDailyAccountSnapshot(
+			long startTime = 0,
+			long endTime = 0,
+			int limit = 7,
+			long recvWindow = 0
+		)
+		{
+			string json = await _rawApi.GetDailyAccountSnapshotAsync(
+				SnapshotType.SPOT,
+				startTime,
+				endTime,
+				limit,
+				recvWindow
+			);
+			return JsonConvert.DeserializeObject<SnapshotResponce<SpotSnapshotData>>(json)!;
+		}
+
+
+		public async Task<SnapshotResponce<MarginSnapshotData>> GetMarginDailyAccountSnapshot(
+			long startTime = 0,
+			long endTime = 0,
+			int limit = 7,
+			long recvWindow = 0
+		)
+		{
+			string json = await _rawApi.GetDailyAccountSnapshotAsync(
+				SnapshotType.MARGIN,
+				startTime,
+				endTime,
+				limit,
+				recvWindow
+			);
+			return JsonConvert.DeserializeObject<SnapshotResponce<MarginSnapshotData>>(json)!;
+		}
+
+
+		public async Task<SnapshotResponce<FuturesSnapshotData>> GetFuturesDailyAccountSnapshot(
+			long startTime = 0,
+			long endTime = 0,
+			int limit = 7,
+			long recvWindow = 0
+		)
+		{
+			string json = await _rawApi.GetDailyAccountSnapshotAsync(
+				SnapshotType.FUTURES,
+				startTime,
+				endTime,
+				limit,
+				recvWindow
+			);
+			return JsonConvert.DeserializeObject<SnapshotResponce<FuturesSnapshotData>>(json)!;
+		}
+		#endregion
 	}
 }

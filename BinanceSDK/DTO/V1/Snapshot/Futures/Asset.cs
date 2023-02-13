@@ -1,0 +1,16 @@
+﻿using Newtonsoft.Json;
+
+namespace BinanceSDK.DTO.V1.Snapshot.Futures
+{
+	public class Asset
+	{
+		[JsonProperty("asset")]
+		public decimal Name;
+
+		[JsonProperty("marginBalance")]
+		public decimal MarginBalance;
+
+		[JsonProperty("walletBalance")]
+		public decimal WalletBalance;
+	}
+}
