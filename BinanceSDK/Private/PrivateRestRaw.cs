@@ -24,6 +24,20 @@ namespace BinanceSDK.Private
 		}
 
 
+		public async Task<string> GetApiKeyPermissions()
+		{
+			const string route = "/sapi/v1/account/apiRestrictions";
+			string query = $"timestamp={_TS()}";
+			string signature = _signerHmac.Sign(query);
+			string url = $"{_domain}{route}?{query}&signature={signature}";
+
+			var req = new HttpRequestMessage(HttpMethod.Get, url);
+			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
+
+			return await _client.Send(req);
+		}
+
+
 		public async Task<string> GetCoinsAsync()
 		{
 			const string route = "/sapi/v1/capital/config/getall";

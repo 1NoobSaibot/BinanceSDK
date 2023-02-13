@@ -24,6 +24,13 @@ namespace BinanceSDK.Private
 		}
 
 
+		public async Task<ApiKeyPermission> GetKeyPermission()
+		{
+			string json = await _rawApi.GetApiKeyPermissions();
+			return JsonConvert.DeserializeObject<ApiKeyPermission>(json)!;
+		}
+
+
 		public async Task<Coin[]> GetCoinsAsync()
 		{
 			string json = await _rawApi.GetCoinsAsync();

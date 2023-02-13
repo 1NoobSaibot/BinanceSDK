@@ -40,5 +40,8 @@ namespace BinanceSDK.Private
 		#endregion
 
 		Task<Withdraw> Withdraw(string coin, string address, decimal amount);
+
+
+		Task<ApiKeyPermission> GetKeyPermission();
 	}
 }

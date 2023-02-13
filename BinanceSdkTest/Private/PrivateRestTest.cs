@@ -9,6 +9,14 @@ namespace BinanceSdkTest.Private
 
 
 		[TestMethod]
+		public async Task ShouldGetKeyPermission()
+		{
+			var res = await client.GetKeyPermission();
+			Assert.IsNotNull(res);
+		}
+
+
+		[TestMethod]
 		public async Task ShouldGetCoins()
 		{
 			var coins = await client.GetCoinsAsync();
