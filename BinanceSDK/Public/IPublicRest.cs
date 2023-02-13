@@ -7,5 +7,6 @@ namespace BinanceSDK.Public
 	{
 		Task<Ticker[]> GetTickersAsync();
 		Task<SystemStatus> GetSystemStatusAsync();
+		Task Ping();
 	}
 }

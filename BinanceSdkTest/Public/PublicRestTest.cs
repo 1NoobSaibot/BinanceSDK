@@ -1,7 +1,7 @@
 using BinanceSDK.DTO.V1;
 using BinanceSDK.Public;
 
-namespace BinanceSdkTest
+namespace BinanceSdkTest.Public
 {
 	[TestClass]
 	public class PublicRestTest
@@ -30,6 +30,13 @@ namespace BinanceSdkTest
 				status.Message == SystemStatus.NormalStatusMessage
 				|| status.Message == SystemStatus.MaintenanceStatusMessage
 			);
+		}
+
+
+		[TestMethod]
+		public async Task ShouldPing()
+		{
+			await client.Ping();
 		}
 	}
 }

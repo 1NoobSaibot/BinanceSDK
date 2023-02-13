@@ -20,5 +20,11 @@ namespace BinanceSDK.Public
 			string json = await _rawApi.GetSystemStatusAsync();
 			return JsonConvert.DeserializeObject<SystemStatus>(json)!;
 		}
+
+
+		public Task Ping()
+		{
+			return _rawApi.Ping();
+		}
 	}
 }
