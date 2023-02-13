@@ -1,17 +1,25 @@
 ﻿using BinanceSDK.DTO;
-using BinanceSDK.Helpers;
+using BinanceSDK.Helpers.WebClient;
 
 namespace BinanceSDK.Private
 {
-	public class PrivateRestRaw
+	public class PrivateRestRaw : IDisposable
 	{
 		private readonly string _domain = "https://api.binance.com";
 		private readonly Access _access;
 		private readonly SignerHmac _signerHmac;
+		private IWebClient _client;
 
 
-		public PrivateRestRaw(Access access) {
+		public PrivateRestRaw(Access access)
+			: this(access, new MyClient())
+		{ }
+
+
+		internal PrivateRestRaw(Access access, IWebClient client)
+		{
 			_access = access;
+			_client = client;
 			_signerHmac = new SignerHmac(access.SecretKey);
 		}
 
@@ -23,13 +31,11 @@ namespace BinanceSDK.Private
 			string signature = _signerHmac.Sign(query);
 
 			string url = $"{_domain}{route}?{query}&signature={signature}";
-			using (MyClient client = new MyClient())
-			{
-				var req = new HttpRequestMessage(HttpMethod.Get, url);
-				req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
+
+			var req = new HttpRequestMessage(HttpMethod.Get, url);
+			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
 				
-				return await client.Send(req);
-			}
+			return await _client.Send(req);
 		}
 
 
@@ -73,19 +79,27 @@ namespace BinanceSDK.Private
 
 			string signature = _signerHmac.Sign(query);
 			string url = $"{_domain}{route}?{query}&signature={signature}";
-			using (MyClient client = new MyClient())
-			{
-				var req = new HttpRequestMessage(HttpMethod.Get, url);
-				req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
 
-				return await client.Send(req);
-			}
+			var req = new HttpRequestMessage(HttpMethod.Get, url);
+			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
+
+			return await _client.Send(req);
 		}
 
 
 		private static long _TS()
 		{
 			return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+		}
+
+
+		public void Dispose()
+		{
+			if (_client is IDisposable disposable)
+			{
+				disposable.Dispose();
+			}
+			_signerHmac.Dispose();
 		}
 	}
 }

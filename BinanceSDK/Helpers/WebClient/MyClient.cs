@@ -1,10 +1,10 @@
-﻿namespace BinanceSDK.Helpers
+﻿namespace BinanceSDK.Helpers.WebClient
 {
 	/// <summary>
 	/// This class was created to wrap HttpClient
 	/// and to throw errors always when we get bad responce status
 	/// </summary>
-	internal class MyClient : IDisposable
+	internal class MyClient : IWebClient, IDisposable
 	{
 		private HttpClient _httpClient = new HttpClient();
 

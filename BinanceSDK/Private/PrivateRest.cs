@@ -4,6 +4,7 @@ using BinanceSDK.DTO.V1.Snapshot;
 using BinanceSDK.DTO.V1.Snapshot.Futures;
 using BinanceSDK.DTO.V1.Snapshot.Margin;
 using BinanceSDK.DTO.V1.Snapshot.Spot;
+using BinanceSDK.Helpers.WebClient;
 using Newtonsoft.Json;
 
 namespace BinanceSDK.Private
@@ -15,6 +16,11 @@ namespace BinanceSDK.Private
 
 		public PrivateRest(Access access) {
 			_rawApi = new PrivateRestRaw(access);
+		}
+
+
+		internal PrivateRest(Access access, IWebClient client) {
+			_rawApi = new PrivateRestRaw(access, client);
 		}
 
 

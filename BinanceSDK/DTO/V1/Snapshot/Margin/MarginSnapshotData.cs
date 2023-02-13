@@ -2,7 +2,7 @@
 
 namespace BinanceSDK.DTO.V1.Snapshot.Margin
 {
-	public abstract class MarginSnapshotData {
+	public sealed class MarginSnapshotData {
 		[JsonProperty("totalAssetOfBtc")]
 		public decimal TotalAssetOfBtc;
 

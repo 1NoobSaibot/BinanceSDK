@@ -5,7 +5,7 @@ namespace BinanceSDK.DTO.V1.Snapshot.Futures
 	public class Asset
 	{
 		[JsonProperty("asset")]
-		public decimal Name;
+		public string? Name;
 
 		[JsonProperty("marginBalance")]
 		public decimal MarginBalance;

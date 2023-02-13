@@ -1,4 +1,4 @@
-﻿using BinanceSDK.Helpers;
+﻿using BinanceSDK.Helpers.WebClient;
 
 namespace BinanceSDK.Public
 {
