@@ -87,6 +87,25 @@ namespace BinanceSDK.Private
 		}
 
 
+		public async Task<string> Withdraw(
+			string coin,
+			string address,
+			decimal amount
+		)
+		{
+			const string route = "/sapi/v1/capital/withdraw/apply";
+			string query = $"coin={coin}&address={address}&amount={amount}&timestamp={_TS()}";
+			string signature = _signerHmac.Sign(query);
+			query += $"";
+
+			string url = $"{_domain}{route}?{query}&signature={signature}";
+			var req = new HttpRequestMessage(HttpMethod.Post, url);
+			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
+
+			return await _client.Send(req);
+		}
+
+
 		private static long _TS()
 		{
 			return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();

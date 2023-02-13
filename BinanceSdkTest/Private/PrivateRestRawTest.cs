@@ -15,5 +15,16 @@ namespace BinanceSdkTest.Private
 			var res = await client.GetDailyAccountSnapshotAsync(SnapshotType.SPOT);
 			Assert.IsNotNull(res);
 		}
+
+
+		// TODO: Test the withdraw method in better way
+		[TestMethod]
+		public async Task ShouldTryWithdrawCoins()
+		{
+			await Assert.ThrowsExceptionAsync<Exception>(async () =>
+			{
+				await client.Withdraw("USDT", "fakeAddress", 0);
+			});
+		}
 	}
 }

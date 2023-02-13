@@ -85,5 +85,12 @@ namespace BinanceSDK.Private
 			return JsonConvert.DeserializeObject<SnapshotResponce<FuturesSnapshotData>>(json)!;
 		}
 		#endregion
+
+
+		public async Task<Withdraw> Withdraw(string coin, string address, decimal amount)
+		{
+			string json = await _rawApi.Withdraw(coin, address, amount);
+			return JsonConvert.DeserializeObject<Withdraw>(json)!;
+		}
 	}
 }
