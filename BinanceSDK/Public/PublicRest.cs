@@ -16,12 +16,6 @@ namespace BinanceSDK.Public
 		}
 
 
-		public Task Ping()
-		{
-			return _rawApi.Ping();
-		}
-
-
 		public async Task<SystemStatus> GetSystemStatusAsync()
 		{
 			string json = await _rawApi.GetSystemStatusAsync();
@@ -33,6 +27,19 @@ namespace BinanceSDK.Public
 		{
 			string json = await _rawApi.GetTickersAsync();
 			return JsonConvert.DeserializeObject<Ticker[]>(json)!;
+		}
+
+
+		public async Task<TickerPriceChangeFull[]> Get24hrTickerPriceChangeStatistics()
+		{
+			string json = await _rawApi.Get24hrTickerPriceChangeStatistic();
+			return JsonConvert.DeserializeObject<TickerPriceChangeFull[]>(json)!;
+		}
+
+
+		public Task Ping()
+		{
+			return _rawApi.Ping();
 		}
 	}
 }

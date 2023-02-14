@@ -8,6 +8,7 @@ namespace BinanceSDK.Public
 		Task<ExchangeInfo> GetExchangeInfo();
 		Task<Ticker[]> GetTickersAsync();
 		Task<SystemStatus> GetSystemStatusAsync();
+		Task<TickerPriceChangeFull[]> Get24hrTickerPriceChangeStatistics();
 		Task Ping();
 	}
 }

@@ -44,6 +44,15 @@ namespace BinanceSdkTest.Public
 
 
 		[TestMethod]
+		public async Task ShouldGetTickerPriceChangeStatistics()
+		{
+			var res = await client.Get24hrTickerPriceChangeStatistics();
+			Assert.IsNotNull(res);
+			Assert.AreNotEqual(0, res.Length);
+		}
+
+
+		[TestMethod]
 		public async Task ShouldPing()
 		{
 			await client.Ping();

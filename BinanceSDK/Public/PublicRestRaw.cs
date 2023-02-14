@@ -34,6 +34,15 @@ namespace BinanceSDK.Public
 			return _Get(_domain + route);
 		}
 
+
+		// TODO: Implement symbols parameter
+		public Task<string> Get24hrTickerPriceChangeStatistic(string[]? symbols = null)
+		{
+			const string route = "/api/v3/ticker/24hr";
+			return _Get(_domain + route);
+		}
+
+
 		public Task Ping()
 		{
 			const string route = "/api/v3/ping";
