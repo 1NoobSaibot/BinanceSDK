@@ -16,6 +16,13 @@ namespace BinanceSDK.Public
 		}
 
 
+		public async Task<BookTicker[]> GetOrderBookTickers()
+		{
+			string json = await _rawApi.GetOrderBookTickers();
+			return JsonConvert.DeserializeObject<BookTicker[]>(json)!;
+		}
+
+
 		public async Task<SystemStatus> GetSystemStatusAsync()
 		{
 			string json = await _rawApi.GetSystemStatusAsync();

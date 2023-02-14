@@ -21,6 +21,13 @@ namespace BinanceSDK.Public
 		}
 
 
+		public Task<string> GetOrderBookTickers()
+		{
+			const string route = "/api/v3/ticker/bookTicker";
+			return _Get(_domain + route);
+		}
+
+
 		public Task<string> GetTickersAsync()
 		{
 			const string route = "/api/v3/ticker/24hr";

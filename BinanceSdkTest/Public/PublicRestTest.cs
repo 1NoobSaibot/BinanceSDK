@@ -19,6 +19,15 @@ namespace BinanceSdkTest.Public
 
 
 		[TestMethod]
+		public async Task ShouldGetOrderBookTickers()
+		{
+			var tickers = await client.GetOrderBookTickers();
+			Assert.IsNotNull(tickers);
+			Assert.AreNotEqual(0, tickers.Length);
+		}
+
+
+		[TestMethod]
 		public async Task ShouldGetTickers()
 		{
 			var tickers = await client.GetTickersAsync();
