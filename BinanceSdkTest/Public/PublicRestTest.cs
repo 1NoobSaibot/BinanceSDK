@@ -6,7 +6,17 @@ namespace BinanceSdkTest.Public
 	[TestClass]
 	public class PublicRestTest
 	{
-		private PublicRest client = new PublicRest();
+		private IPublicRest client = new PublicRest();
+
+
+		[TestMethod]
+		public async Task ShouldGetExchangeInfo()
+		{
+			var info = await client.GetExchangeInfo();
+			Assert.IsNotNull(info);
+			Assert.AreNotEqual(0, info.Symbols!.Length);
+		}
+
 
 		[TestMethod]
 		public async Task ShouldGetTickers()

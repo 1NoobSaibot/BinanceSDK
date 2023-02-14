@@ -8,10 +8,17 @@ namespace BinanceSDK.Public
 	{
 		private readonly PublicRestRaw _rawApi = new PublicRestRaw();
 
-		public async Task<Ticker[]> GetTickersAsync()
+
+		public async Task<ExchangeInfo> GetExchangeInfo()
 		{
-			string json = await _rawApi.GetTickersAsync();
-			return JsonConvert.DeserializeObject<Ticker[]>(json)!;
+			string json = await _rawApi.GetExchangeInfo();
+			return JsonConvert.DeserializeObject<ExchangeInfo>(json)!;
+		}
+
+
+		public Task Ping()
+		{
+			return _rawApi.Ping();
 		}
 
 
@@ -22,9 +29,10 @@ namespace BinanceSDK.Public
 		}
 
 
-		public Task Ping()
+		public async Task<Ticker[]> GetTickersAsync()
 		{
-			return _rawApi.Ping();
+			string json = await _rawApi.GetTickersAsync();
+			return JsonConvert.DeserializeObject<Ticker[]>(json)!;
 		}
 	}
 }

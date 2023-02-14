@@ -14,6 +14,13 @@ namespace BinanceSDK.Public
 		}
 
 
+		public Task<string> GetExchangeInfo()
+		{
+			const string route = "/api/v3/exchangeInfo";
+			return _Get(_domain + route);
+		}
+
+
 		public Task<string> GetTickersAsync()
 		{
 			const string route = "/api/v3/ticker/24hr";
