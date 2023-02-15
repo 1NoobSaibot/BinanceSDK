@@ -27,29 +27,14 @@ namespace BinanceSDK.Private
 		public async Task<string> GetApiKeyPermissions()
 		{
 			const string route = "/sapi/v1/account/apiRestrictions";
-			string query = $"timestamp={_TS()}";
-			string signature = _signerHmac.Sign(query);
-			string url = $"{_domain}{route}?{query}&signature={signature}";
-
-			var req = new HttpRequestMessage(HttpMethod.Get, url);
-			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
-
-			return await _client.Send(req);
+			return await _Get(route);
 		}
 
 
 		public async Task<string> GetCoinsAsync()
 		{
 			const string route = "/sapi/v1/capital/config/getall";
-			string query = $"timestamp={_TS()}";
-			string signature = _signerHmac.Sign(query);
-
-			string url = $"{_domain}{route}?{query}&signature={signature}";
-
-			var req = new HttpRequestMessage(HttpMethod.Get, url);
-			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
-				
-			return await _client.Send(req);
+			return await _Get(route);
 		}
 
 
@@ -73,7 +58,7 @@ namespace BinanceSDK.Private
 		)
 		{
 			const string route = "/sapi/v1/accountSnapshot";
-			string query = $"timestamp={_TS()}&type={type}";
+			string query = $"type={type}";
 			if (startTime != 0)
 			{
 				query += $"&startTime={startTime}";
@@ -91,13 +76,14 @@ namespace BinanceSDK.Private
 				query += $"&reqvWindow={recvWindow}";
 			}
 
-			string signature = _signerHmac.Sign(query);
-			string url = $"{_domain}{route}?{query}&signature={signature}";
+			return await _Get(route, query);
+		}
 
-			var req = new HttpRequestMessage(HttpMethod.Get, url);
-			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
 
-			return await _client.Send(req);
+		public async Task TestNewOrder()
+		{
+			const string route = "/api/v3/order/test";
+			await _Post(route);
 		}
 
 
@@ -108,15 +94,9 @@ namespace BinanceSDK.Private
 		)
 		{
 			const string route = "/sapi/v1/capital/withdraw/apply";
-			string query = $"coin={coin}&address={address}&amount={amount}&timestamp={_TS()}";
-			string signature = _signerHmac.Sign(query);
-			query += $"";
+			string query = $"coin={coin}&address={address}&amount={amount}";
 
-			string url = $"{_domain}{route}?{query}&signature={signature}";
-			var req = new HttpRequestMessage(HttpMethod.Post, url);
-			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
-
-			return await _client.Send(req);
+			return await _Post(route, query);
 		}
 
 
@@ -133,6 +113,39 @@ namespace BinanceSDK.Private
 				disposable.Dispose();
 			}
 			_signerHmac.Dispose();
+		}
+
+
+		private Task<string> _Get(string route, string? query = null)
+		{
+			return _Send(route, query, HttpMethod.Get);
+		}
+
+
+		private Task<string> _Post(string route, string? query = null)
+		{
+			return _Send(route, query, HttpMethod.Post);
+		}
+
+
+		private Task<string> _Send(string route, string? query, HttpMethod method)
+		{
+			if (string.IsNullOrEmpty(query))
+			{
+				query = $"timestamp={_TS()}";
+			}
+			else
+			{
+				query += $"&timestamp={_TS()}";
+			}
+
+			string signature = _signerHmac.Sign(query);
+			string url = $"{_domain}{route}?{query}&signature={signature}";
+
+			var req = new HttpRequestMessage(method, url);
+			req.Headers.Add("X-MBX-APIKEY", _access.ApiKey);
+
+			return _client.Send(req);
 		}
 	}
 }

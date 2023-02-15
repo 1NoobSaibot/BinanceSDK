@@ -39,9 +39,18 @@ namespace BinanceSDK.Private
 		);
 		#endregion
 
-		Task<Withdraw> Withdraw(string coin, string address, decimal amount);
-
-
+		
 		Task<ApiKeyPermission> GetKeyPermission();
+
+
+		// TODO: Make params as for placing real order
+		/// <summary>
+		/// Test new order creation and signature/recvWindow long.
+		/// Creates and validates a new order but does not send it into the matching engine.
+		/// </summary>
+		Task TestNewOrder();
+
+
+		Task<Withdraw> Withdraw(string coin, string address, decimal amount);
 	}
 }

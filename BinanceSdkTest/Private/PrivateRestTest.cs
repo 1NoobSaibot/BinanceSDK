@@ -5,7 +5,7 @@ namespace BinanceSdkTest.Private
 	[TestClass]
 	public class PrivateRestTest
 	{
-		private PrivateRest client = new PrivateRest(Env.Access);
+		private IPrivateRest client = new PrivateRest(Env.Access);
 
 
 		[TestMethod]
@@ -34,6 +34,13 @@ namespace BinanceSdkTest.Private
 			{
 				Assert.AreEqual("spot", shot!.Type);
 			}
+		}
+
+
+		[TestMethod]
+		public async Task ShouldTestNewOrder()
+		{
+			await client.TestNewOrder();
 		}
 	}
 }

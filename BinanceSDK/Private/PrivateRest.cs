@@ -94,6 +94,13 @@ namespace BinanceSDK.Private
 		#endregion
 
 
+		public async Task TestNewOrder()
+		{
+			// TODO: It doesn't work with my current apiKey
+			// return await _rawApi.TestNewOrder();
+		}
+
+
 		public async Task<Withdraw> Withdraw(string coin, string address, decimal amount)
 		{
 			string json = await _rawApi.Withdraw(coin, address, amount);
