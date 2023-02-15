@@ -4,6 +4,7 @@ using BinanceSDK.DTO.V1.Snapshot;
 using BinanceSDK.DTO.V1.Snapshot.Futures;
 using BinanceSDK.DTO.V1.Snapshot.Margin;
 using BinanceSDK.DTO.V1.Snapshot.Spot;
+using BinanceSDK.DTO.V3.Trade;
 using BinanceSDK.Helpers.WebClient;
 using Newtonsoft.Json;
 
@@ -94,10 +95,9 @@ namespace BinanceSDK.Private
 		#endregion
 
 
-		public async Task TestNewOrder()
+		public Task TestNewOrder(TradeRequest req)
 		{
-			// TODO: It doesn't work with my current apiKey
-			// return await _rawApi.TestNewOrder();
+			return _rawApi.TestNewOrder(req);
 		}
 
 

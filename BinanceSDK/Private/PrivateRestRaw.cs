@@ -1,4 +1,5 @@
 ﻿using BinanceSDK.DTO;
+using BinanceSDK.DTO.V3.Trade;
 using BinanceSDK.Helpers.WebClient;
 
 namespace BinanceSDK.Private
@@ -80,10 +81,11 @@ namespace BinanceSDK.Private
 		}
 
 
-		public async Task TestNewOrder()
+		public async Task TestNewOrder(TradeRequest req)
 		{
 			const string route = "/api/v3/order/test";
-			await _Post(route);
+			string query = req.GetQueryString();
+			await _Post(route, query);
 		}
 
 

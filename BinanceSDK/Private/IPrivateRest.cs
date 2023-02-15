@@ -3,6 +3,7 @@ using BinanceSDK.DTO.V1.Snapshot.Futures;
 using BinanceSDK.DTO.V1.Snapshot.Margin;
 using BinanceSDK.DTO.V1.Snapshot.Spot;
 using BinanceSDK.DTO.V1.Snapshot;
+using BinanceSDK.DTO.V3.Trade;
 
 namespace BinanceSDK.Private
 {
@@ -48,7 +49,7 @@ namespace BinanceSDK.Private
 		/// Test new order creation and signature/recvWindow long.
 		/// Creates and validates a new order but does not send it into the matching engine.
 		/// </summary>
-		Task TestNewOrder();
+		Task TestNewOrder(TradeRequest req);
 
 
 		Task<Withdraw> Withdraw(string coin, string address, decimal amount);

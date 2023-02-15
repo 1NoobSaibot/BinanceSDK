@@ -1,3 +1,4 @@
+using BinanceSDK.DTO.V3.Trade;
 using BinanceSDK.Private;
 
 namespace BinanceSdkTest.Private
@@ -40,7 +41,8 @@ namespace BinanceSdkTest.Private
 		[TestMethod]
 		public async Task ShouldTestNewOrder()
 		{
-			await client.TestNewOrder();
+			var req = TradeRequest.BuyMarket("BTCUSDT", 1);
+			await client.TestNewOrder(req);
 		}
 	}
 }
