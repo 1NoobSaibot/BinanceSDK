@@ -15,6 +15,9 @@ namespace BinanceSDK.Private
 		Task<Coin[]> GetCoinsAsync();
 
 
+		Task<CancelOrderResponse> CancelOrder(CancelOrderRequest req);
+
+
 		#region Getting Snapshots
 		Task<SnapshotResponce<SpotSnapshotData>> GetSpotDailyAccountSnapshot(
 			long startTime = 0,

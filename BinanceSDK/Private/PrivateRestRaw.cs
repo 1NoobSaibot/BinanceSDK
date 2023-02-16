@@ -25,6 +25,14 @@ namespace BinanceSDK.Private
 		}
 
 
+		public async Task<string> CancelOrder(CancelOrderRequest req)
+		{
+			const string route = "/api/v3/order";
+			string query = req.GetQueryString();
+			return await _Delete(route, query);
+		}
+
+
 		public async Task<string> GetApiKeyPermissions()
 		{
 			const string route = "/sapi/v1/account/apiRestrictions";
@@ -123,6 +131,12 @@ namespace BinanceSDK.Private
 				disposable.Dispose();
 			}
 			_signerHmac.Dispose();
+		}
+
+
+		private Task<string> _Delete(string route, string? query = null)
+		{
+			return _Send(route, query, HttpMethod.Delete);
 		}
 
 

@@ -24,5 +24,13 @@ namespace BinanceSDK.DTO.V3.Trade
 		
 		[JsonProperty("transactTime")]
 		public long TransactTime;
+
+
+		public CancelOrderRequest MakeCancelRequest()
+		{
+			var req = new CancelOrderRequest(Symbol!);
+			req.OrderID = ID;
+			return req;
+		}
 	}
 }

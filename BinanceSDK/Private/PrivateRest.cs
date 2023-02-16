@@ -25,6 +25,13 @@ namespace BinanceSDK.Private
 		}
 
 
+		public async Task<CancelOrderResponse> CancelOrder(CancelOrderRequest req)
+		{
+			string json = await _rawApi.CancelOrder(req);
+			return JsonConvert.DeserializeObject<CancelOrderResponse>(json)!;
+		}
+
+
 		public async Task<ApiKeyPermission> GetKeyPermission()
 		{
 			string json = await _rawApi.GetApiKeyPermissions();

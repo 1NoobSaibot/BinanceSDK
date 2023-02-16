@@ -1,3 +1,4 @@
+using BinanceSDK.DTO;
 using BinanceSDK.DTO.V3.Trade;
 using BinanceSDK.Private;
 
@@ -44,5 +45,19 @@ namespace BinanceSdkTest.Private
 			var req = TradeRequest.BuyMarket("BTCUSDT", 1);
 			await client.TestNewOrder(req);
 		}
+
+
+		// TODO: We need 10 dollars to test it
+		/* [TestMethod]
+		public async Task ShouldPlaceAndCancelRealOrder()
+		{
+			var req = TradeRequest.BuyLimit("BTCUSDT", 10, 1);
+			await client.TestNewOrder(req);
+
+			var order = await client.PlaceOrderAck(req);
+
+			var cancelOrderData = await client.CancelOrder(order.MakeCancelRequest());
+			Assert.AreEqual(OrderStatus.CANCELED, cancelOrderData.Status);
+		} */
 	}
 }

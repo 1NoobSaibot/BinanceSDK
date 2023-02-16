@@ -82,5 +82,15 @@ namespace BinanceSDK.DTO.V3.Trade
 			req.Quantity = quantity;
 			return req;
 		}
+
+
+		public static TradeRequest BuyLimit(string symbol, decimal quantity, decimal price)
+		{
+			var req = new TradeRequest(symbol, OrderSide.BUY, OrderType.LIMIT);
+			req.Quantity = quantity;
+			req.Price = price;
+			req.TimeInForce = DTO.TimeInForce.GTC;
+			return req;
+		}
 	}
 }
