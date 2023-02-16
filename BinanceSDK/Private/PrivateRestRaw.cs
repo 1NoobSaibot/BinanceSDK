@@ -81,6 +81,14 @@ namespace BinanceSDK.Private
 		}
 
 
+		public Task<string> PlaceOrder(TradeRequest req)
+		{
+			const string route = "/api/v3/order";
+			string query = req.GetQueryString();
+			return _Post(route, query);
+		}
+
+
 		public async Task TestNewOrder(TradeRequest req)
 		{
 			const string route = "/api/v3/order/test";

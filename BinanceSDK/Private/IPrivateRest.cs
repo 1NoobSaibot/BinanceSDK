@@ -52,6 +52,11 @@ namespace BinanceSDK.Private
 		Task TestNewOrder(TradeRequest req);
 
 
+		Task<OrderAck> PlaceOrderAck(TradeRequest req);
+		Task<OrderResult> PlaceOrderResult(TradeRequest req);
+		Task<OrderFull> PlaceOrderFull(TradeRequest req);
+
+
 		Task<Withdraw> Withdraw(string coin, string address, decimal amount);
 	}
 }

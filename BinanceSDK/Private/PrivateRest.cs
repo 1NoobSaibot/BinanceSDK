@@ -95,6 +95,30 @@ namespace BinanceSDK.Private
 		#endregion
 
 
+		public async Task<OrderAck> PlaceOrderAck(TradeRequest req)
+		{
+			req.NewOrderRespType = OrderResponceType.ACK;
+			string json = await _rawApi.PlaceOrder(req);
+			return JsonConvert.DeserializeObject<OrderAck>(json)!;
+		}
+
+
+		public async Task<OrderResult> PlaceOrderResult(TradeRequest req)
+		{
+			req.NewOrderRespType = OrderResponceType.RESULT;
+			string json = await _rawApi.PlaceOrder(req);
+			return JsonConvert.DeserializeObject<OrderResult>(json)!;
+		}
+
+
+		public async Task<OrderFull> PlaceOrderFull(TradeRequest req)
+		{
+			req.NewOrderRespType = OrderResponceType.FULL;
+			string json = await _rawApi.PlaceOrder(req);
+			return JsonConvert.DeserializeObject<OrderFull>(json)!;
+		}
+
+
 		public Task TestNewOrder(TradeRequest req)
 		{
 			return _rawApi.TestNewOrder(req);
