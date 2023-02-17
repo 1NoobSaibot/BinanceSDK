@@ -14,7 +14,7 @@ namespace BinanceSDK.DTO.V1.Snapshot.Futures
 		public decimal PositionAmount;
 
 		[JsonProperty("symbol")]
-		public string Symbol;
+		public string? Symbol;
 
 		[JsonProperty("unRealizedProfit")]
 		public decimal UnrealizedProfit;

@@ -5,7 +5,7 @@ namespace BinanceSDK.DTO.V3
 	public class Ticker
 	{
 		[JsonProperty("symbol")]
-		public string Symbol;
+		public string? Symbol;
 
 		[JsonProperty("priceChange")]
 		public decimal PriceChange;

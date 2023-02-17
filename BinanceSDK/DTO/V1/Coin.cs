@@ -5,7 +5,7 @@ namespace BinanceSDK.DTO.V1
 	public class Coin
 	{
 		[JsonProperty("coin")]
-    public string ShortName;
+    public string? ShortName;
 
     [JsonProperty("depositAllEnable")]
     public bool depositAllEnable;
@@ -34,10 +34,10 @@ namespace BinanceSDK.DTO.V1
     public decimal Locked;
 
     [JsonProperty("name")]
-    public string Name;
+    public string? Name;
 
     [JsonProperty("networkList")]
-    public Network[] Networks;
+    public Network[]? Networks;
 
     [JsonProperty("storage")]
     public decimal Storage;
