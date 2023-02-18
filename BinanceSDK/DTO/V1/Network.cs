@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BinanceSDK.Helpers;
+using Newtonsoft.Json;
 
 namespace BinanceSDK.DTO.V1
 {
@@ -47,12 +48,15 @@ namespace BinanceSDK.DTO.V1
     [JsonProperty("withdrawEnable")]
     public bool IsWithdrawEnable;
 
+    /// <summary>
+    /// Fixed Withdrawal Fee
+    /// </summary>
     [JsonProperty("withdrawFee")]
     public decimal WithdrawFee;
 
-    // TODO: HAAAAA???
+    // TODO: It seems to be a TickSize value
     [JsonProperty("withdrawIntegerMultiple")]
-    public decimal WithdrawIntegerMultiple; // "0.00000001" // HAAA???
+    public decimal WithdrawIntegerMultiple;
 
     [JsonProperty("withdrawMax")]
     public decimal MaxWithdrawAmount;
@@ -71,5 +75,11 @@ namespace BinanceSDK.DTO.V1
 
     [JsonProperty("busy")]
     public bool IsBusy;
+
+
+    public int GetWithdrawPrecision()
+    {
+      return WithdrawIntegerMultiple.TickSizeToPrecision();
+    }
 	}
 }

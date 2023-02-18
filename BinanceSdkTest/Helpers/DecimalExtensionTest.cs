@@ -29,6 +29,29 @@ namespace BinanceSdkTest.Helpers
 		}
 
 
+		[TestMethod]
+		public void CanGetPrecisionOfTickSize()
+		{
+			(decimal, int)[] examples = new (decimal, int)[]
+			{
+				(1, 0),
+				(0, 8),	// Default precision
+				(0.1m, 1),
+				(0.01m, 2),
+				(0.001m, 3),
+				(0.0001m, 4),
+				(0.00001m, 5)
+			};
+
+			foreach (var example in examples)
+			{
+				int expected = example.Item2;
+				int actual = example.Item1.TickSizeToPrecision();
+				Assert.AreEqual(expected, actual);
+			}
+		}
+
+
 		private void _ForAll_I_J(Action<int, int> test)
 		{
 			for (int i = -100; i <= 100; i++)

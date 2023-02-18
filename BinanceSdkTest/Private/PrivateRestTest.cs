@@ -24,6 +24,14 @@ namespace BinanceSdkTest.Private
 			var coins = await client.GetCoinsAsync();
 			Assert.IsNotNull(coins);
 			Assert.IsTrue(coins.Length > 0);
+
+			foreach (var coin in coins)
+			{
+				foreach (var network in coin.Networks!)
+				{
+					_Check(network.WithdrawIntegerMultiple);
+				}
+			}
 		}
 
 
@@ -59,5 +67,35 @@ namespace BinanceSdkTest.Private
 			var cancelOrderData = await client.CancelOrder(order.MakeCancelRequest());
 			Assert.AreEqual(OrderStatus.CANCELED, cancelOrderData.Status);
 		} */
+
+
+		private void _CheckTickSize(decimal tickSize)
+		{
+			string[] validValues = new string[]
+			{
+				"1",
+				"0",
+				"0,1",
+				"0,01",
+				"0,001",
+				"0,0001",
+				"0,00001",
+				"0,000001",
+				"0,0000001",
+				"0,00000001"
+			};
+
+			string str = tickSize.ToString();
+			foreach (var valid in validValues)
+			{
+				if (str == valid)
+				{
+					return;
+				}
+			}
+
+
+			throw new Exception($"Got invalid value ({str})");
+		}
 	}
 }
