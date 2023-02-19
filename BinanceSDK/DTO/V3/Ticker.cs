@@ -26,7 +26,7 @@ namespace BinanceSDK.DTO.V3
 		/// TODO: Check the value
 		/// </summary>
 		[JsonProperty("lastQty")]
-		public decimal LastPriceQuote;
+		public decimal LastQuantity;
 
 		[JsonProperty("bidPrice")]
 		public decimal BidPrice;
@@ -35,7 +35,7 @@ namespace BinanceSDK.DTO.V3
 		/// TODO: Check the value
 		/// </summary>
 		[JsonProperty("bidQty")]
-		public decimal BidQuote;
+		public decimal BidQuantity;
 
 		[JsonProperty("askPrice")]
 		public decimal AskPrice;
@@ -44,7 +44,7 @@ namespace BinanceSDK.DTO.V3
 		/// TODO: Check the value
 		/// </summary>
 		[JsonProperty("askQty")]
-		public decimal AskPriceQuote;
+		public decimal AskQuantity;
 
 		[JsonProperty("openPrice")]
 		public decimal OpenPrice;

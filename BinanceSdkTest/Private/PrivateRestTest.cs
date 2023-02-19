@@ -29,7 +29,7 @@ namespace BinanceSdkTest.Private
 			{
 				foreach (var network in coin.Networks!)
 				{
-					_Check(network.WithdrawIntegerMultiple);
+					_CheckTickSize(network.WithdrawIntegerMultiple);
 				}
 			}
 		}

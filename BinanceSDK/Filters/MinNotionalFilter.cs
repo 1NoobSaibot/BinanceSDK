@@ -1,4 +1,7 @@
-﻿namespace BinanceSDK.Filters
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace BinanceSDK.Filters
 {
 	/// <summary>
 	/// The MIN_NOTIONAL filter defines the minimum notional value allowed for an order on a symbol.
@@ -13,10 +16,27 @@
 	/// 0 means the last price is used.
 	/// </summary>
 	/// TODO: Find out how to implement this filter
-	public class MinNotionalFilter
+	public class MinNotionalFilter : Filter
 	{
+		private const string MinNotionalKey = "minNotional";
+    private const string ApplyToMarketKey = "applyToMarket";
+    private const string AvgPriceMinsKey = "avgPriceMins";
+
+		public override FilterType Type => FilterType.MIN_NOTIONAL;
+
+		[JsonProperty(MinNotionalKey)]
 		public readonly decimal MinNotional;
+		[JsonProperty(ApplyToMarketKey)]
 		public readonly bool ApplyToMarket;
+		[JsonProperty(AvgPriceMinsKey)]
 		public readonly decimal AveragePriceForLastMinutes;
+
+
+		internal MinNotionalFilter(JObject jo)
+		{
+			MinNotional = jo[MinNotionalKey]!.Value<decimal>();
+			ApplyToMarket = jo[ApplyToMarketKey]!.Value<bool>();
+			AveragePriceForLastMinutes = jo[AvgPriceMinsKey]!.Value<decimal>();
+		}
 	}
 }

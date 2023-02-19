@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using BinanceSDK.Filters;
+using Newtonsoft.Json;
 
 namespace BinanceSDK.DTO.V3
 {
@@ -54,7 +55,7 @@ namespace BinanceSDK.DTO.V3
 		/// All filters are optional
 		/// </summary>
 		[JsonProperty("filters")]
-		public Dictionary<string, object>[]? Filters;
+		public Filter[]? Filters;
 
 		[JsonProperty("permissions")]
 		public SymbolPermissions[]? Permissions;
