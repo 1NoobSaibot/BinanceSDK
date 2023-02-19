@@ -68,7 +68,12 @@ namespace BinanceSDK.Filters
 				return objectType == typeof(Filter);
 			}
 
-			public override object? ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+			public override object? ReadJson(
+				JsonReader reader,
+				Type objectType,
+				object? existingValue,
+				JsonSerializer serializer
+			)
 			{
 				JObject jo = JObject.Load(reader);
 				return Filter.Deserialize(jo);

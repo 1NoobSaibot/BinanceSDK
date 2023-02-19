@@ -13,6 +13,7 @@ namespace BinanceSdkTest.Helpers
 
 		public async Task<string> Send(HttpRequestMessage message)
 		{
+			await Task.Run(() => {});
 			return _nextJson ?? string.Empty;
 		}
 	}

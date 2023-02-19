@@ -19,7 +19,7 @@ namespace BinanceSdkTest
 			using (StreamReader reader = new StreamReader(_fileName, Encoding.UTF8))
 			{
 				string json = reader.ReadToEnd();
-				var access = JsonConvert.DeserializeObject<Access>(json);
+				var access = JsonConvert.DeserializeObject<Access>(json)!;
 				_access = access;
 				return access;
 			}
